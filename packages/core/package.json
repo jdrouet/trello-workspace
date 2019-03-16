@@ -1,0 +1,21 @@
+{
+  "name": "@trello/core",
+  "version": "1.0.0",
+  "author": "Jeremie Drouet <jeremie.drouet@gmail.com>",
+  "main": "source/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "nock": "^10.0.6",
+    "nyc": "^13.3.0"
+  },
+  "scripts": {
+    "coverage": "nyc npm test",
+    "test": "mocha"
+  }
+}

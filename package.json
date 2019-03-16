@@ -1,0 +1,15 @@
+{
+  "name": "@trello/workspace",
+  "version": "1.0.0",
+  "author": "Jeremie Drouet <jeremie.drouet@gmail.com>",
+  "description": "Trello Workspace",
+  "private": true,
+  "scripts": {
+    "coverage": "yarn workspaces run coverage",
+    "test": "yarn workspaces run test"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ]
+}
