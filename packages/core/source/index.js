@@ -74,7 +74,7 @@ class TrelloClient {
    */
   getBoard(options) {
     debug('board.get', options);
-    return this.get(`/boards/${options.board}`);
+    return this.get(`/boards/${options.board}`, options);
   }
 
   /**

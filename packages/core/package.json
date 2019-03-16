@@ -1,6 +1,6 @@
 {
   "name": "trello-core",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Jeremie Drouet <jeremie.drouet@gmail.com>",
   "main": "source/index.js",
   "license": "MIT",
