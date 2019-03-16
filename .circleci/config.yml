@@ -1,0 +1,17 @@
+version: 2
+
+jobs:
+  test-all:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn coverage
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-all
