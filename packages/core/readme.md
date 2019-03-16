@@ -32,4 +32,4 @@ client.search({query: 'whatever'})
 - [x] Create card `POST /api/cards`
 - [x] Update card `PUT /api/cards/:cardid`
 - [ ] Get attachments `GET /api/cards/:cardid/attachments`
-- [ ] Upload attachment `POST /api/cards/:cardid/attachments`
+- [x] Upload attachment `POST /api/cards/:cardid/attachments`

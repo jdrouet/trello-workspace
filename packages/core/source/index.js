@@ -11,6 +11,9 @@ const handleResult = (resolve, reject) => (err, res, body) => {
   if (res.statusCode < 200 || res.statusCode >= 300) {
     return reject(body);
   }
+  if (typeof body === 'string') {
+    return resolve(JSON.parse(body));
+  }
   return resolve(body);
 };
 
@@ -115,6 +118,19 @@ class TrelloClient {
   getCard(options) {
     debug('card.get', options);
     return this.get(`/cards/${options.card}`);
+  }
+
+  /**
+   * @param {object} options
+   */
+  createAttachment(options) {
+    debug('attachment.create', options);
+    return this.post(`/cards/${options.card}/attachments`, {
+      formData: {
+        name: options.name,
+        file: options.stream,
+      },
+    });
   }
 
   /**
