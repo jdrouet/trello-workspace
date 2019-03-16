@@ -1,5 +1,5 @@
 {
-  "name": "@trello/workspace",
+  "name": "trello-workspace",
   "version": "1.0.0",
   "author": "Jeremie Drouet <jeremie.drouet@gmail.com>",
   "description": "Trello Workspace",

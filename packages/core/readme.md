@@ -1,15 +1,15 @@
-# @trello/core
+# trello-core
 
 Core Trello node module
 
 ## Usage
 
 ```bash
-npm i --save @trello/core
+npm i --save trello-core
 ```
 
 ```
-const TrelloClient = require('@trello/core');
+const TrelloClient = require('trello-core');
 
 const client = new TrelloClient({
   key: 'your trello key',

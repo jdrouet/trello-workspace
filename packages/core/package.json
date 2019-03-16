@@ -1,5 +1,5 @@
 {
-  "name": "@trello/core",
+  "name": "trello-core",
   "version": "1.0.0",
   "author": "Jeremie Drouet <jeremie.drouet@gmail.com>",
   "main": "source/index.js",
