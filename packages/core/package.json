@@ -4,6 +4,10 @@
   "author": "Jeremie Drouet <jeremie.drouet@gmail.com>",
   "main": "source/index.js",
   "license": "MIT",
+  "files": [
+    "source",
+    "package.json"
+  ],
   "dependencies": {
     "debug": "^4.1.1",
     "request": "^2.88.0"
