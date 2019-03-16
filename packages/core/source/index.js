@@ -8,8 +8,11 @@ const handleResult = (resolve, reject) => (err, res, body) => {
     debug('error', err);
     return reject(err);
   }
-  if (res.statusCode < 200 || res.statusCode >= 300) {
-    return reject(body);
+  if (res.statusCode >= 400) {
+    debug('error', body);
+    const error = new Error(res.body);
+    error.statusCode = res.statusCode;
+    return reject(error);
   }
   if (typeof body === 'string') {
     return resolve(JSON.parse(body));
