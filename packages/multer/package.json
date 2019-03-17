@@ -1,6 +1,6 @@
 {
   "name": "trello-multer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Jeremie Drouet <jeremie.drouet@gmail.com>",
   "main": "source/index.js",
   "license": "MIT",
@@ -9,8 +9,9 @@
     "package.json"
   ],
   "dependencies": {
+    "concat-stream": "^2.0.0",
     "debug": "^4.1.1",
-    "trello-core": "1.0.2"
+    "trello-core": "1.0.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
