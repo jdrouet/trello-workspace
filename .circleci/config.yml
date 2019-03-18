@@ -90,7 +90,7 @@ workflows:
             tags:
               only: /^core-v.*/
             branches:
-              only: /master/
+              ignore: /.*/
       - deploy-multer:
           requires:
             - test-multer
@@ -98,4 +98,4 @@ workflows:
             tags:
               only: /^multer-v.*/
             branches:
-              only: /master/
+              ignore: /.*/
