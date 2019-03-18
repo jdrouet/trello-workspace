@@ -14,7 +14,10 @@ jobs:
       - run: yarn
       - run: yarn coverage
       - run: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
-      - run: ./node_modules/.bin/codecov -F core
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/core/coverage.lcov
 
   test-multer:
     <<: *defaults
@@ -25,7 +28,24 @@ jobs:
       - run: yarn
       - run: yarn coverage
       - run: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
-      - run: ./node_modules/.bin/codecov -F multer
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/multer/coverage.lcov
+
+  coverage:
+    <<: *defaults
+    working_directory: ~/repo
+    steps:
+      - checkout:
+          path: ~/repo
+      - attach_workspace:
+          at: ~/repo
+      - run: cat packages/core/coverage.lcov > coverage.lcov
+      - run: echo "<<<<<< EOF" >> coverage.lcov
+      - run: cat packages/multer/coverage.lcov >> coverage.lcov
+      - run: echo "<<<<<< EOF" >> coverage.lcov
+      - run: bash <(curl -s https://codecov.io/bash) -Z -C $CIRCLE_SHA1
 
   deploy-core:
     <<: *defaults
@@ -55,9 +75,14 @@ jobs:
 
 workflows:
   version: 2
-  core:
+  test-deploy:
     jobs:
       - test-core
+      - test-multer
+      - coverage:
+          requires:
+            - test-core
+            - test-multer
       - deploy-core:
           requires:
             - test-core
@@ -66,9 +91,6 @@ workflows:
               only: /^core-v.*/
             branches:
               only: /master/
-  multer:
-    jobs:
-      - test-multer
       - deploy-multer:
           requires:
             - test-multer
