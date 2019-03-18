@@ -13,6 +13,8 @@ jobs:
           path: ~/repo
       - run: yarn
       - run: yarn coverage
+      - run: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
+      - run: ./node_modules/.bin/codecov -F core
 
   test-multer:
     <<: *defaults
@@ -22,6 +24,8 @@ jobs:
           path: ~/repo
       - run: yarn
       - run: yarn coverage
+      - run: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
+      - run: ./node_modules/.bin/codecov -F multer
 
   deploy-core:
     <<: *defaults

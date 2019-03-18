@@ -1,0 +1,16 @@
+coverage:
+  status:
+    project:
+      default: false
+      core:
+        flags: core
+      multer:
+        flags: multer
+
+flags:
+  core:
+    paths:
+      - packages/core
+  multer:
+    paths:
+      - packages/multer
