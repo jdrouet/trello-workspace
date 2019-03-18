@@ -1,10 +1,13 @@
 version: 2
 
+defaults: &defaults
+  docker:
+    - image: circleci/node:lts
+
 jobs:
   test-core:
+    <<: *defaults
     working_directory: ~/repo/packages/core
-    docker:
-      - image: circleci/node:lts
     steps:
       - checkout:
           path: ~/repo
@@ -12,20 +15,61 @@ jobs:
       - run: yarn coverage
 
   test-multer:
+    <<: *defaults
     working_directory: ~/repo/packages/multer
-    docker:
-      - image: circleci/node:lts
     steps:
       - checkout:
           path: ~/repo
       - run: yarn
       - run: yarn coverage
 
+  deploy-core:
+    <<: *defaults
+    working_directory: ~/repo/packages/core
+    steps:
+      - checkout:
+          path: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+
+  deploy-multer:
+    <<: *defaults
+    working_directory: ~/repo/packages/multer
+    steps:
+      - checkout:
+          path: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+
 workflows:
   version: 2
   core:
     jobs:
       - test-core
+      - deploy-core:
+          requires:
+            - test-core
+          filters:
+            tags:
+              only: /^core-v.*/
+            branches:
+              only: /master/
   multer:
     jobs:
       - test-multer
+      - deploy-multer:
+          requires:
+            - test-multer
+          filters:
+            tags:
+              only: /^multer-v.*/
+            branches:
+              only: /master/
