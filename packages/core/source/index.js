@@ -76,9 +76,13 @@ class TrelloClient {
     return this.execute({
       method: 'post',
       url: '/lists',
+      qs: {
+        idBoard: options.board,
+      },
       body: {
         name: options.name,
       },
+      json: true,
     });
   }
 
@@ -144,7 +148,7 @@ class TrelloClient {
     debug('search', options);
     return this.execute({
       method: 'get',
-      url: 'search',
+      url: '/search',
       qs: {
         query: options.query,
       },

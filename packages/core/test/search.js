@@ -14,8 +14,8 @@ describe('search', () => {
     const scope = nock('https://api.trello.com/1')
       .get('/search')
       .query({
-        ...config,
         query: 'test',
+        ...config,
       })
       .replyWithError('unauthorized');
     const client = new Client(config);
